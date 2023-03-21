@@ -1,5 +1,5 @@
 {
-  "name": "defi-tutorial",
+  "name": "defi_staking",
   "version": "0.1.0",
   "description": "DeFi Token Staking App",
   "author": "c-money",
@@ -18,31 +18,38 @@
     "chai": "^4.2.0",
     "chai-as-promised": "7.1.1",
     "chai-bignumber": "3.0.0",
+    "https-browserify": "^1.0.0",
     "identicon.js": "^2.3.3",
+    "os-browserify": "^0.3.0",
     "react": "^16.8.4",
-    "react-bootstrap": "1.0.0-beta.5",
+    "react-bootstrap": "^1.6.6",
     "react-dom": "16.8.4",
     "react-particles-js": "^3.5.3",
-    "react-scripts": "2.1.3",
+    "react-scripts": "^5.0.1",
     "react-tsparticles": "^1.31.2",
     "solc": "^0.8.6",
+    "stream-http": "^3.2.0",
     "truffle": "^5.1.39",
     "typescript": "^4.3.5",
-    "web3": "1.2.11"
+    "web3": "^0.20.7"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-scripts --openssl-legacy-provider start",
+    "build": "react-scripts --openssl-legacy-provider build"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "resolutions": {
+    "autoprefixer": "10.4.5"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "postcss-loader": "^7.0.0"
+  }
 }
