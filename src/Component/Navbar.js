@@ -9,7 +9,8 @@ class Navbar extends Component {
             
                 < a className ='navbar-brand col-sm-3 col-md-2 mr-0' 
                     style={{ color: 'white' }} 
-                    href
+                     href='true'
+
                     > 
                     <img src={bank} width='50' height='30' className='d-inline-block align-top' alt='bank' />
                     

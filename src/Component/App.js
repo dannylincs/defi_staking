@@ -5,7 +5,7 @@ import Web3 from 'web3';
 import Tether from '../truffle_abis/Tether.json';
 import RWD from '../truffle_abis/RWD.json';
 import DecentralBank from '../truffle_abis/DecentralBank.json';
-
+import Main from './Main.js';
 
 class App extends Component {
 
@@ -40,12 +40,12 @@ class App extends Component {
        if(tetherData) {
            const tether = new web3.eth.Contract(Tether.abi, tetherData.address)
            this.setState({tether})
-           let tetherBalance = await tether.methods.balalnceOf(this.setState.account).call()
+           let tetherBalance = await tether.methods.balalnceOf(this.state.account).call()
            this.setState({tetherBalance : tetherBalance.toString() })
            console.log({balance: tetherBalance})
            
        } else {
-        window.alert('Tether network  ')
+        window.alert('Tether network not deployed')
        }
 
         //load RWD Contract
@@ -53,8 +53,8 @@ class App extends Component {
         if(rwdData) {
             const rwd = new web3.eth.Contract(RWD.abi, rwdData.address)
             this.setState({rwd})
-            let rwdBalance = await rwd.methods.balalnceOf(this.setState.account).call()
-            this.setState({rwdBalance : rwdBalance.toString() })
+            let rwdBalance = await rwd.methods.balalnceOf(this.state.account).call()
+            this.setState({rwdBalance : rwdBalance.toString()})
             
         } else {
          window.alert('Reward Token not deployed to the network  ')
@@ -65,7 +65,7 @@ class App extends Component {
        if(tetherData) {
            const decentralBank = new web3.eth.Contract(DecentralBank.abi, decentralBankData.address)
            this.setState({decentralBank})
-           let stakingBalance = await decentralBank.methods.stakingbalalnce(this.setState.account).call()
+           let stakingBalance = await decentralBank.methods.stakingbalalnce(this.state.account).call()
            this.setState({stakingBalance: stakingBalance.toString() })
            
        } else {
@@ -90,14 +90,32 @@ class App extends Component {
         }
     }
     render() {
-        this.loadBlockChainData()
+        let content
+        // eslint-disable-next-line no-lone-blocks
+        {this.state.loading ? content =
+        <p id='loader' className="text-center" style={{margin:'30px'}}>
+        LOADING PLEASE...</p> : content = 
+        <Main
+        tetherBallance={this.state.tetherBalance}
+        rwdBalance={this.state.rwdBalance}
+        stakingBalance={this.state.stakingBalance}
+        />}
+    
         return (
             <div>
                 <Navbar account={this.state.account}/>
-                <div className='text-center'>
-                <h1> 
-                   {console.log(this.state.loading)} 
-                </h1>
+                     <div className='container-fluid mt-5'>
+                        <div className="row ">
+                         <main role="main" className="col-lg-12 ml-auto mr-auto" style ={{maxWidth:'600px', minHeigh:'100vm' }}>
+                            <div>
+                              
+                                {content}
+
+                            </div>
+
+                         </main>
+                        </div>    
+    
                 </div>
                 
             </div>
